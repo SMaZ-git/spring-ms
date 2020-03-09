@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: gateway
+  cloud:
+    config:
+      uri:
+        - http://config:8000
+      fail-fast: true
+
+
+#zuul:
+#  host:
+#    socket-timeout-millis: 20000
+#    connect-timeout-millis: 20000
+#  routes:
+#    kafka-producer:
+#      path: /kafka/**
+#      serviceId: kafka-producer
+#      stripPrefix: false

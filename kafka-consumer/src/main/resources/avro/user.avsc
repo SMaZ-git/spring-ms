@@ -1,0 +1,16 @@
+{
+"namespace" : "com.smaz.ms.model",
+"type":"record",
+"name": "User",
+"fields": [
+        {
+            "name":"user",
+            "type":"string",
+            "avro.java.string":"String"
+        },
+        {
+            "name":"age",
+            "type":"int"
+        }
+    ]
+}

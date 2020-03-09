@@ -1,0 +1,12 @@
+server:
+  port: 4000
+
+zuul:
+  host:
+    socket-timeout-millis: 20000
+    connect-timeout-millis: 20000
+  routes:
+    kafka-producer:
+      path: /kafka/**
+      serviceId: kafka-producer
+      stripPrefix: false

@@ -1,0 +1,28 @@
+server:
+  port: 7000
+
+spring:
+  kafka:
+    properties:
+      schema.registry.url: http://localhost:8081
+    bootstrap-servers:
+      - localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+
+#eureka:
+#  client:
+#    serviceUrl:
+#      defaultZone: http://localhost:8761/eureka/
+#  instance:
+#    prefer-ip-address: true
+
+#spring:
+#  application:
+#    name: kafka-producer
+#  cloud:
+#    config:
+#      fail-fast: true
+#      uri: http://localhost:8000/
+

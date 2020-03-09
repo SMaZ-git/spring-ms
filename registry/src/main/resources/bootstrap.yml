@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: registry
+  cloud:
+    config:
+      uri: http://config:8000
+      fail-fast: true
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+  server:
+    wait-time-in-ms-when-sync-empty: 0
