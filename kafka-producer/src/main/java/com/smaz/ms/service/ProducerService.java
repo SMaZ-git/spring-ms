@@ -28,6 +28,14 @@ public class ProducerService {
 
         logger.info(future.toString());
 
+        // Test the theory with delay of 5 seconds, Http should get response immediately
+        /*try {
+            log.info(String.format("Thread name %s", Thread.currentThread().getName()));
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }*/
+        
         // register a callback with the listener to receive the result of the send asynchronously
         future.addCallback(new ListenableFutureCallback<SendResult<String, String>>() {
 

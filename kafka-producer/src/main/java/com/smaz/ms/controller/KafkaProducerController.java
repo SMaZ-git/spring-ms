@@ -1,5 +1,6 @@
 package com.smaz.ms.controller;
 
+import com.smaz.ms.model.ResponseModel;
 import com.smaz.ms.model.User;
 import com.smaz.ms.service.ProducerService;
 import org.slf4j.Logger;
@@ -9,8 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.stream.IntStream;
+import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 
 @RestController
 @RequestMapping(value = "/kafka")
@@ -23,11 +24,17 @@ public class KafkaProducerController {
 
 
     @GetMapping("/send")
-    public void sendMessage(@RequestParam(value = "name") String name, @RequestParam(value = "age") int age){
-        logger.info("name is :" +name + " and age of :" + age);
-        //producerService.sendMessage(new User(name, age));
-        IntStream.range(1, 1000).forEach(i -> producerService.sendMessage(new User(name+i, age+i)));
-        //producerService.sendMessage(new UserModel(name, age));
+    public Mono<ResponseModel> sendMessage(@RequestParam(value = "name") String name, @RequestParam(value = "age") int age) {
+        long start = System.currentTimeMillis();
+        logger.info(String.format(Thread.currentThread().getName()));
+        logger.info("name is :" + name + " and age of :" + age);
+
+        Mono.just(new User(name, age))
+                .log()
+                .subscribeOn(Schedulers.parallel())
+                .subscribe(user -> producerService.sendMessage(user));
+        logger.info(String.format(" time taken %s", (System.currentTimeMillis() - start)));
+        return Mono.just(new ResponseModel("Success", "Request submitted successfully"));
     }
 
 }
