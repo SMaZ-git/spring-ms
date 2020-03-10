@@ -19,13 +19,13 @@ docker run --name gateway --network my-net -p 4000:4000 -t gateway:v1.0
 - Kafka setting in local. 
 ```
 zookeeper-server-start <kafka_home>/etc/zookeeper.properties
-kafka-server-start.sh <kafka_home>/etc/config/server.properties
+kafka-server-start <kafka_home>/etc/server.properties
 schema-registry-start <kafka_home>/etc/schema-registry/schema-registry.properties
 ```
 
 - For Avro user class will be created with below maven plugin
 ```
-  <plugin>
+           <plugin>
                 <groupId>org.apache.avro</groupId>
                 <artifactId>avro-maven-plugin</artifactId>
                 <version>1.8.2</version>
